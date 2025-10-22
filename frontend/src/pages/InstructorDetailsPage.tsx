@@ -14,13 +14,15 @@ import {
 	StyledInstructorTags
 } from "../components/styles/InstructorDetailsPage.styled";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
 function InstructorDetailsPage() {
 	const { id } = useParams();
 
 	const [instructor, setInstructor] = useState<Instructor | null>(null);
 
 	useEffect(() => {
-		fetch(`http://localhost:8080/instructors/${id}`)
+		fetch(`${API_URL}/instructors/${id}`)
 			.then((response) => response.json())
 			.then((data: Instructor) => setInstructor(data))
 			.catch((error: unknown) =>
@@ -49,7 +51,7 @@ function InstructorDetailsPage() {
 		<section>
 			<StyledInstructorCard>
 				<img
-					src={`http://localhost:8080/${instructor.profile_picture}`}
+					src={`${API_URL}/${instructor.profile_picture}`}
 					alt={`Profile picture of instructor ${instructor.name}`}
 				/>
 

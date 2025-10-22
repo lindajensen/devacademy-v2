@@ -18,6 +18,8 @@ interface NewUser {
 	password: string;
 }
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
 function SignUpPage() {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -68,7 +70,7 @@ function SignUpPage() {
 			password
 		};
 
-		fetch("http://localhost:8080/signup", {
+		fetch(`${API_URL}/signup`, {
 			body: JSON.stringify(newUser),
 			headers: {
 				"Content-Type": "application/json"

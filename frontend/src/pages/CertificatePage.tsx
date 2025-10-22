@@ -14,6 +14,8 @@ import {
 	StyledFallbackMessage
 } from "../components/styles/CertificatePage.styled";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
 function CertificatePage() {
 	const { course_id } = useParams();
 	const [searchParams] = useSearchParams();
@@ -31,7 +33,7 @@ function CertificatePage() {
 		const token = localStorage.getItem("authToken");
 		const id = localStorage.getItem("userId");
 
-		fetch(`http://localhost:8080/dashboard/${id}`, {
+		fetch(`${API_URL}/dashboard/${id}`, {
 			headers: {
 				Authorization: `Bearer ${token}`
 			}
