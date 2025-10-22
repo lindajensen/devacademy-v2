@@ -18,12 +18,13 @@ interface Instructor {
 	focus_area: string;
 	tags: string;
 }
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 function InstructorsPage() {
 	const [instructors, SetInstructors] = useState<Instructor[]>([]);
 
 	useEffect(() => {
-		fetch("http://localhost:8080/instructors")
+		fetch(`${API_URL}/instructors`)
 			.then((response) => response.json())
 			.then((data: Instructor[]) => SetInstructors(data));
 	}, []);
@@ -41,7 +42,7 @@ function InstructorsPage() {
 				{instructors.map((instructor) => (
 					<StyledInstructorCard key={instructor.instructor_id}>
 						<img
-							src={`http://localhost:8080/${instructor.profile_picture}`}
+							src={`${API_URL}/${instructor.profile_picture}`}
 							alt={instructor.name}
 						/>
 						<h2>{instructor.name}</h2>

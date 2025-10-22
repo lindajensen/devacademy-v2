@@ -10,13 +10,15 @@ import {
 	StyledInstructorQuote
 } from "./styles/InstructorSpotlight.styled";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
 function InstructorSpotlight() {
 	const [instructors, setInstructors] = useState<Instructor[]>([]);
 	const [selectedInstructor, setSelectedInstructor] =
 		useState<Instructor | null>(null);
 
 	useEffect(() => {
-		fetch("http://localhost:8080/instructors")
+		fetch(`${API_URL}/instructors`)
 			.then((response) => response.json())
 			.then((data: Instructor[]) => setInstructors(data));
 	}, []);
@@ -46,7 +48,7 @@ function InstructorSpotlight() {
 								$isActive={
 									selectedInstructor?.instructor_id === instructor.instructor_id
 								}
-								src={`http://localhost:8080/${instructor.profile_picture}`}
+								src={`${API_URL}/${instructor.profile_picture}`}
 								alt={`Profile picture for instructor ${instructor.name}`}
 							/>
 						</button>

@@ -9,6 +9,8 @@ import {
 	StyledScrollableRow
 } from "./styles/PopularCourses.styled";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
 function PopularCourses() {
 	const [courses, setCourses] = useState<CourseIncludingInstructorAndRating[]>(
 		[]
@@ -16,7 +18,7 @@ function PopularCourses() {
 
 	// FETCH POPULAR COURSES
 	useEffect(() => {
-		fetch("http://localhost:8080/landing-page")
+		fetch(`${API_URL}/landing-page`)
 			.then((response) => response.json())
 			.then((data: CourseIncludingInstructorAndRating[]) => {
 				const popularCourses: CourseIncludingInstructorAndRating[] =
@@ -39,7 +41,7 @@ function PopularCourses() {
 							aria-label={`View details for the course ${course.course_name}`}
 							to={`/courses/${course.course_id}`}>
 							<img
-								src={`http://localhost:8080/${course.thumbnail}`}
+								src={`${API_URL}/${course.thumbnail}`}
 								alt={course.course_name}
 							/>
 							<h3>{course.course_name}</h3>

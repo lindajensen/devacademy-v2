@@ -23,6 +23,8 @@ import {
 	StyledRatingContainer
 } from "../components/styles/CourseDetailsPage.styled";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
 function CourseDetailsPage() {
 	const { course_id } = useParams();
 
@@ -45,14 +47,14 @@ function CourseDetailsPage() {
 	useEffect(() => {
 		if (!course_id) return;
 
-		fetch(`http://localhost:8080/reviews/${course_id}`)
+		fetch(`${API_URL}/reviews/${course_id}`)
 			.then((response) => response.json())
 			.then((data: ReviewIncludingUsername[]) => setReview(data[0] ?? null))
 			.catch((error: unknown) => console.log("Error loading reviews", error));
 	}, [course_id]);
 
 	useEffect(() => {
-		fetch(`http://localhost:8080/courses/${course_id}`)
+		fetch(`${API_URL}/courses/${course_id}`)
 			.then((response) => response.json())
 			.then((data: CourseIncludingInstructorAndRating) => setCourse(data))
 			.catch((error: unknown) => console.log("Error loading course", error));
@@ -110,7 +112,7 @@ function CourseDetailsPage() {
 	return (
 		<section>
 			<StyledCourseDetailsCard>
-				<img src={`http://localhost:8080/${course.thumbnail}`} alt="" />
+				<img src={`${API_URL}/${course.thumbnail}`} alt="" />
 
 				<div className="card-wrapper">
 					<h1>{course.course_name}</h1>

@@ -29,6 +29,8 @@ import {
 	StyledToastMessageInfo
 } from "../components/styles/Global";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
 function DashboardPage() {
 	const { id } = useParams();
 	const [user, setUser] = useState<User | null>(null);
@@ -67,7 +69,7 @@ function DashboardPage() {
 	useEffect(() => {
 		const token = localStorage.getItem("authToken");
 
-		fetch(`http://localhost:8080/dashboard/${id}`, {
+		fetch(`${API_URL}/dashboard/${id}`, {
 			headers: {
 				Authorization: `Bearer ${token}`
 			}
@@ -141,7 +143,7 @@ function DashboardPage() {
 			comment
 		};
 
-		fetch("http://localhost:8080/reviews", {
+		fetch(`${API_URL}/reviews`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -215,7 +217,7 @@ function DashboardPage() {
 			return;
 		}
 
-		const response = await fetch("http://localhost:8080/account/email", {
+		const response = await fetch(`${API_URL}/account/email`, {
 			body: JSON.stringify({ email: newEmail }),
 			headers: {
 				Authorization: `Bearer ${token}`,
@@ -281,7 +283,7 @@ function DashboardPage() {
 			return;
 		}
 
-		const response = await fetch("http://localhost:8080/account/password", {
+		const response = await fetch(`${API_URL}/account/password`, {
 			body: JSON.stringify({ password: newPassword }),
 			headers: {
 				Authorization: `Bearer ${token}`,
@@ -314,7 +316,7 @@ function DashboardPage() {
 			return;
 		}
 
-		fetch("http://localhost:8080/account", {
+		fetch(`${API_URL}/account`, {
 			method: "DELETE",
 			headers: {
 				Authorization: `Bearer ${token}`
@@ -343,10 +345,7 @@ function DashboardPage() {
 	return (
 		<StyledDashboardContainer>
 			<StyledUserProfile>
-				<img
-					src={`http://localhost:8080/${user.avatar}`}
-					alt={`Avatar of ${user.name}`}
-				/>
+				<img src={`${API_URL}/${user.avatar}`} alt={`Avatar of ${user.name}`} />
 				<p>{user.name}</p>
 				<p>{user.email}</p>
 				<p>{user.role}</p>

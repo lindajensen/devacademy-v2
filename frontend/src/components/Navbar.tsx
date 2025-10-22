@@ -37,6 +37,8 @@ interface DecodedToken {
 	exp: number;
 }
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
 function Navbar() {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [email, setEmail] = useState("");
@@ -123,7 +125,7 @@ function Navbar() {
 			password
 		};
 
-		fetch("http://localhost:8080/signin", {
+		fetch(`${API_URL}/signin`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"

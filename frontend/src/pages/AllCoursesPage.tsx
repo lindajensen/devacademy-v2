@@ -9,6 +9,8 @@ import {
 	StyledCourseCard
 } from "../components/styles/AllCoursesPage.styled";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
 function AllCoursesPage() {
 	const [courses, setCourses] = useState<CourseIncludingInstructorAndRating[]>(
 		[]
@@ -16,7 +18,7 @@ function AllCoursesPage() {
 
 	// FETCH ALL COURSES
 	useEffect(() => {
-		fetch("http://localhost:8080/courses")
+		fetch(`${API_URL}courses`)
 			.then((response) => response.json())
 			.then((data: CourseIncludingInstructorAndRating[]) => setCourses(data))
 			.catch((error: unknown) => console.log("Error fetching courses:", error));
@@ -39,7 +41,7 @@ function AllCoursesPage() {
 						<Link
 							aria-label={`View details for the course ${course.course_name}`}
 							to={`/courses/${course.course_id}`}>
-							<img src={`http://localhost:8080/${course.thumbnail}`} alt="" />
+							<img src={`${API_URL}/${course.thumbnail}`} alt="" />
 							<h3>{course.course_name}</h3>
 						</Link>
 
