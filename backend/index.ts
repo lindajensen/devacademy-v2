@@ -37,10 +37,13 @@ function verifyToken(
 }
 
 const client = new Client({
-	connectionString: process.env.PGURI
+	connectionString: process.env.DATABASE_URL
 });
 
-client.connect();
+client
+	.connect()
+	.then(() => console.log("Connected to Neon database"))
+	.catch((err) => console.error("Connection error:", err));
 
 // INTERFACES ------------------------------------------------------------------
 interface Course {
