@@ -4,6 +4,7 @@ DevAcademy is a web application designed for web enthusiasts who want to improve
 
 Note!
 If you want to use the dashboard you can create a new account or log in to an existing account to access all features. You can use the following credentials for a pre-existing user account:
+
 Email: anna.johnson@mail.com
 Password: annaspassword123
 
