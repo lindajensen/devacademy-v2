@@ -1,4 +1,8 @@
 .env
+
 *.js
 node_modules
 public
+
+*.sqlite
+*.sqlite3
