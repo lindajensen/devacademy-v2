@@ -18,7 +18,7 @@ function AllCoursesPage() {
 
 	// FETCH ALL COURSES
 	useEffect(() => {
-		fetch(`${API_URL}courses`)
+		fetch(`${API_URL}/courses`)
 			.then((response) => response.json())
 			.then((data: CourseIncludingInstructorAndRating[]) => setCourses(data))
 			.catch((error: unknown) => console.log("Error fetching courses:", error));
