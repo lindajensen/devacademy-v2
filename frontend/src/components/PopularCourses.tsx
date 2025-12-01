@@ -6,7 +6,8 @@ import { CourseIncludingInstructorAndRating } from "../App";
 import {
 	StyledPopularCourses,
 	StyledCourseCard,
-	StyledScrollableRow
+	StyledScrollableRow,
+	StyledLoadingContainer
 } from "./styles/PopularCourses.styled";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
@@ -15,6 +16,7 @@ function PopularCourses() {
 	const [courses, setCourses] = useState<CourseIncludingInstructorAndRating[]>(
 		[]
 	);
+	const [isLoading, setIsLoading] = useState(true);
 
 	// FETCH POPULAR COURSES
 	useEffect(() => {
@@ -28,8 +30,23 @@ function PopularCourses() {
 
 				setCourses(popularCourses);
 			})
-			.catch((error: unknown) => console.log("Error fetching courses:", error));
+			.catch((error: unknown) => console.log("Error fetching courses:", error))
+			.finally(() => {
+				setIsLoading(false);
+			});
 	}, []);
+
+	if (isLoading) {
+		return (
+			<StyledPopularCourses>
+				<h2>Popular Courses</h2>
+				<StyledLoadingContainer>
+					<div className="spinner" />
+					<p>Loading popular courses...</p>
+				</StyledLoadingContainer>
+			</StyledPopularCourses>
+		);
+	}
 
 	return (
 		<StyledPopularCourses>

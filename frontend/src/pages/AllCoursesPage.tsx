@@ -9,19 +9,25 @@ import {
 	StyledCourseCard
 } from "../components/styles/AllCoursesPage.styled";
 
+import { StyledLoadingContainer } from "../components/styles/PopularCourses.styled";
+
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 function AllCoursesPage() {
 	const [courses, setCourses] = useState<CourseIncludingInstructorAndRating[]>(
 		[]
 	);
+	const [isLoading, setIsLoading] = useState(true);
 
 	// FETCH ALL COURSES
 	useEffect(() => {
 		fetch(`${API_URL}/courses`)
 			.then((response) => response.json())
 			.then((data: CourseIncludingInstructorAndRating[]) => setCourses(data))
-			.catch((error: unknown) => console.log("Error fetching courses:", error));
+			.catch((error: unknown) => console.log("Error fetching courses:", error))
+			.finally(() => {
+				setIsLoading(false);
+			});
 	}, []);
 
 	return (

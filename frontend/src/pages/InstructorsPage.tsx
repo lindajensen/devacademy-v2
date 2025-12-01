@@ -8,6 +8,8 @@ import {
 	StyledInstructorCard
 } from "../components/styles/InstructorsPage.styled";
 
+import { StyledLoadingContainer } from "../components/styles/PopularCourses.styled";
+
 interface Instructor {
 	instructor_id: number;
 	name: string;
@@ -22,12 +24,28 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 function InstructorsPage() {
 	const [instructors, SetInstructors] = useState<Instructor[]>([]);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		fetch(`${API_URL}/instructors`)
 			.then((response) => response.json())
-			.then((data: Instructor[]) => SetInstructors(data));
+			.then((data: Instructor[]) => SetInstructors(data))
+			.finally(() => {
+				setIsLoading(false);
+			});
 	}, []);
+
+	if (isLoading) {
+		return (
+			<StyledInstructorSection>
+				<h1>Meet Your Next Instructor</h1>
+				<StyledLoadingContainer>
+					<div className="spinner" />
+					<p>Loading instructors...</p>
+				</StyledLoadingContainer>
+			</StyledInstructorSection>
+		);
+	}
 
 	return (
 		<StyledInstructorSection>

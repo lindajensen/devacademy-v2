@@ -77,3 +77,32 @@ export const StyledCourseCard = styled.div`
 		margin-top: auto;
 	}
 `;
+
+export const StyledLoadingContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 20px;
+	gap: 16px;
+
+	.spinner {
+		width: 40px;
+		height: 40px;
+		border: 4px solid #f0f0f0;
+		border-top-color: #040e1b;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+	}
+
+	p {
+		color: #666;
+		font-size: 1rem;
+	}
+
+	@keyframes spin {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+`;

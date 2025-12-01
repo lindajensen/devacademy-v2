@@ -10,18 +10,36 @@ import {
 	StyledInstructorQuote
 } from "./styles/InstructorSpotlight.styled";
 
+import { StyledLoadingContainer } from "./styles/PopularCourses.styled";
+
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 function InstructorSpotlight() {
 	const [instructors, setInstructors] = useState<Instructor[]>([]);
 	const [selectedInstructor, setSelectedInstructor] =
 		useState<Instructor | null>(null);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		fetch(`${API_URL}/instructors`)
 			.then((response) => response.json())
-			.then((data: Instructor[]) => setInstructors(data));
+			.then((data: Instructor[]) => setInstructors(data))
+			.finally(() => {
+				setIsLoading(false);
+			});
 	}, []);
+
+	if (isLoading) {
+		return (
+			<StyledInstructorSpotlightSection>
+				<h2>Meet the Instructors</h2>
+				<StyledLoadingContainer>
+					<div className="spinner" />
+					<p>Loading instructors...</p>
+				</StyledLoadingContainer>
+			</StyledInstructorSpotlightSection>
+		);
+	}
 
 	function handleSelectInstructor(id: number) {
 		const foundInstructor = instructors.find(
