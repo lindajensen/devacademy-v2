@@ -5,7 +5,7 @@ export const StyledInstructorSection = styled.section`
 		margin-bottom: 1.5rem;
 	}
 
-	div {
+	> div:not([class]) {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
 		gap: 1.5rem;
