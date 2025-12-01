@@ -30,6 +30,18 @@ function AllCoursesPage() {
 			});
 	}, []);
 
+	if (isLoading) {
+		return (
+			<StyledAllCoursesSection>
+				<h1>Discover Your Next Skill</h1>
+				<StyledLoadingContainer>
+					<div className="spinner" />
+					<p>Loading courses...</p>
+				</StyledLoadingContainer>
+			</StyledAllCoursesSection>
+		);
+	}
+
 	return (
 		<StyledAllCoursesSection>
 			<h1>Discover Your Next Skill</h1>
