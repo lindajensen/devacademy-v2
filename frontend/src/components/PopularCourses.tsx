@@ -59,34 +59,6 @@ function PopularCourses() {
 			</StyledScrollableRow>
 		</StyledPopularCourses>
 	);
-
-	// return (
-	// 	<StyledPopularCourses>
-	// 		<h2>Popular Courses</h2>
-	// 		<StyledScrollableRow>
-	// 			{courses.map((course) => (
-	// 				<StyledCourseCard key={course.course_id}>
-	// 					<Link
-	// 						aria-label={`View details for the course ${course.course_name}`}
-	// 						to={`/courses/${course.course_id}`}>
-	// 						<img
-	// 							src={`${API_URL}/${course.thumbnail}`}
-	// 							alt={course.course_name}
-	// 						/>
-	// 						<h3>{course.course_name}</h3>
-	// 					</Link>
-	// 					<Link
-	// 						aria-label={`View instructor profile for ${course.instructor_name}`}
-	// 						to={`/instructors/${course.instructor_id}`}>
-	// 						{course.instructor_name}
-	// 					</Link>
-
-	// 					<p>${course.price}</p>
-	// 				</StyledCourseCard>
-	// 			))}
-	// 		</StyledScrollableRow>
-	// 	</StyledPopularCourses>
-	// );
 }
 
 export default PopularCourses;
